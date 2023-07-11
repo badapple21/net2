@@ -53,11 +53,11 @@ def create_net(input_neurons, hidden_layers, output_neurons):
     for i in range(1, len(hidden_layers)+1):
         net.append([])
         for j in range(hidden_layers[i-1]):
-            net[i].append(hidden_neuron(0, i, j, [random.randint(40, 60)/100 for i in range(len(net[i-1]))], random.randint(-1, 1)/10))
+            net[i].append(hidden_neuron(0, i, j, [random.randint(40, 60)/100 for i in range(len(net[i-1]))], random.randint(-100, 100)/10))
     #inits the output layer neurons
     net.append([])
     for i in range(output_neurons):
-        net[-1].append(output_neuron(0, i, [random.randint(40, 60)/100 for i in range(len(net[-2]))], random.randint(-10, 10)/100))
+        net[-1].append(output_neuron(0, i, [random.randint(40, 60)/100 for i in range(len(net[-2]))], random.randint(-100, 100)/100))
 
     return net
 
@@ -232,7 +232,7 @@ net = create_net(784, [64], 10)
 net_copy = net
 start = int(time.time())
 for i in range(len(images)):
-        net = train(images[i], get_correct_result(labels[i]), net, .05)
+        net = train(images[i], get_correct_result(labels[i]), net, .1)
         print(f"training: {i}/{len(images)} done, total time: {int((int(time.time())-start)/60)}, est time remaining:  {int((((int(time.time())-start)/(i+1))*(len(images)-i))/60)}")
 
 
