@@ -51,11 +51,11 @@ def create_net(input_neurons, hidden_layers, output_neurons):
     for i in range(1, len(hidden_layers)+1):
         net.append([])
         for j in range(hidden_layers[i-1]):
-            net[i].append(hidden_neuron(0, i, j, [random.randint(40, 60)/100 for i in range(len(net[i-1]))], random.randint(-1, 1)/10))
+            net[i].append(hidden_neuron(0, i, j, [random.randint(40, 60)/100 for i in range(len(net[i-1]))], random.randint(-100, 100)/100))
     #inits the output layer neurons
     net.append([])
     for i in range(output_neurons):
-        net[-1].append(output_neuron(0, i, [random.randint(40, 60)/100 for i in range(len(net[-2]))], random.randint(-1, 1)/10))
+        net[-1].append(output_neuron(0, i, [random.randint(40, 60)/100 for i in range(len(net[-2]))], random.randint(-100, 100)/100))
 
     return net
 
@@ -222,7 +222,7 @@ net = create_net(2, [10], 1)
 
 for i in range(500000):
         data = random.choice(training_data)   
-        net = train(data["inputs"], data["targets"], net, .05)
+        net = train(data["inputs"], data["targets"], net, .1)
 
 
 
